@@ -18,9 +18,6 @@ class Livre
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $ISBN = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
@@ -44,6 +41,17 @@ class Livre
     #[ORM\Column(length: 255)]
     private ?string $auteur = null;
 
+    #[ORM\ManyToOne(inversedBy: 'livres')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categories $categorie = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $ISBN = null;
+
+   
+
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,17 +69,7 @@ class Livre
         return $this;
     }
 
-    public function getISBN(): ?string
-    {
-        return $this->ISBN;
-    }
 
-    public function setISBN(string $ISBN): static
-    {
-        $this->ISBN = $ISBN;
-
-        return $this;
-    }
 
     public function getSlug(): ?string
     {
@@ -168,4 +166,33 @@ class Livre
 
         return $this;
     }
+
+    public function getCategorie(): ?Categories
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categories $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getISBN(): ?string
+    {
+        return $this->ISBN;
+    }
+
+    public function setISBN(string $ISBN): static
+    {
+        $this->ISBN = $ISBN;
+
+        return $this;
+    }
+
+   
+  
+
+   
 }
