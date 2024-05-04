@@ -1,14 +1,5 @@
 {% include "base.html.twig" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
-
+{% block body %}
 <div class="container">
         <h1>{{ detail.titre }}</h1>
         <div class="product-details">
@@ -27,5 +18,4 @@
         </div>
         <a href="{{ url('app_livre') }}" class="btn btn-primary">Back to Product List</a>
     </div>
-    </body>
-</html>
+    {% endblock %}
