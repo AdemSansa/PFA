@@ -17,6 +17,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    
+    
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $authCode;
+
+
 
     #[ORM\Column(length: 180)]
     private ?string $email = null;

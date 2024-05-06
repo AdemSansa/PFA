@@ -1,7 +1,10 @@
 
 {% extends "base.html.twig" %}
 {% block body %}
-<a href='{{url('app_livre_create')}}' <button style="margin-left: 70%" type="button" class="btn btn-outline-primary">Ajouter un nouveau Livre</button></a>
+<h1>Liste des livres</h1>
+<div class="d-flex justify-content-end mb-3">
+<a href='{{url('app_livre_create')}}' <button type="button" class="btn btn-primary btn-lg">Ajouter un nouveau Livre</button></a>
+</div>
 <table  class="table">
   <thead class="thead-dark">
     <tr>
@@ -29,7 +32,7 @@
     <td>{{item.prix}}</td>
     <td>{{item.categorie.libelle}}</td>
     <td><a href='{{url('app_livre_detail',{'id':item.id})}}' <button  type="button" class="btn btn-outline-primary">Voir Detail</button></a></td>
-    <td><button type="button" class="btn btn-outline-info">Editer</button></td>
+    <td><a href='#'><button type="button" class="btn btn-outline-info">Editer</button></td></a>
     <td><a href ="{{url('app_livre_delete',{'id':item.id})}}"<button type="button" class="btn btn-outline-danger">Supprimer</button></a></td>
 </tr>
 {% endfor %}

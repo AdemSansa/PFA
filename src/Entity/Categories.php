@@ -25,7 +25,7 @@ class Categories
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(targetEntity: livre::class, mappedBy: 'categorie')]
+    #[ORM\OneToMany(targetEntity: Livre::class, mappedBy: 'categorie')]
     private Collection $livres;
 
     public function __construct()

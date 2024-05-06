@@ -24,18 +24,39 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">Nos Livres</a>
+								<a class="nav-link" href="{{url('app_livre')}}">Nos Livres</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">Nos Catégories</a>
+								<a class="nav-link" href="{{url('app_categories_index')}}">Nos Catégories</a>
 							</li>
 
+						</ul>
+						<ul class="navbar-nav me-left">
+							<li class="nav-item">
+								<a class="nav-link active" href="#">Panier
+									<span class="visually-hidden">(current)</span>
+								</a>
+							</li>
+							{% if app.user %}
+							
+							<li class="nav-item">
+								<a class="nav-link" href="{{url('app_logout')}}">Deconnexion</a>
+							</li>
+							{% else %}
+								
+							<li class="nav-item">
+								<a class="nav-link" href="{{url('app_register')}}">S'inscrire</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{url('app_login')}}">Connexion</a>
+							</li>
+							
+						{% endif %}
 						</ul>
 
 					</div>
 				</div>
 			</nav>
-			<div class="container mt-3"> {% block body %}{% endblock %}
-				</div>
+			<div class="container mt-3"> {% block body %}{% endblock %}</div>
 			</body>
 		</html>
