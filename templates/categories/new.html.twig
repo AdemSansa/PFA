@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 {% block title %}New Categories{% endblock %}
 
 {% block body %}
@@ -7,5 +7,8 @@
 
     {{ include('categories/_form.html.twig') }}
 
-    <a href="{{ path('app_categories_index') }}">back to list</a>
+    <div class='d-flex justify-content-end'>
+  <a  href="{{ path('app_categories_index') }}"><button class="btn btn-lg btn-outline-primary " type="button">back to list</button></a>
+  
+</div>
 {% endblock %}

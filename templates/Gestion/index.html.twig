@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block body %}
+<h1>Gestion des Comptes</h1>
+
+<ul>
+{% for items in users %}
+
+    <li>{{items.email}}</li>
+    
+
+{% endfor %}
+</ul>
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>email</th>
+                <th>Roles</th>
+                <th>verification <span='2'>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for items in users %}
+            <tr>
+                <td>{{ items.id }}</td>
+                <td>{{ items.email }}</td>
+                <td>{{ items.getRolesString()}}</td>
+                
+                <td>{{ items.isVerifiedtemp()}}</td>
+                <td><a href="#"><button  type="button" class="btn btn-outline-primary">DELETE</button></a> </td>
+                   <td>  <a href="#"><button  type="button" class="btn btn-outline-danger">Edit</button></a></td>
+                   
+               
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\String_;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -77,6 +78,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return list<string>
      */
+    public function getRolesString(): string
+    {
+        $roles = $this->roles;
+        $roleString = "";
+
+        foreach ($roles as $role) {
+        $roleString .= $role . ", ";
+        }
+
+        // Remove the trailing comma and space
+        $roleString = rtrim($roleString, ", ");
+        return $roleString;
+    }
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -131,4 +145,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function isVerifiedtemp(): string
+    {
+        if($this->isVerified)
+        {
+            $verif= "VERIFIED";
+        }
+        else
+        {
+            $verif= "NOT VERIFIED";
+        }
+        
+        return $verif ;
+    }
+
 }

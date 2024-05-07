@@ -97,4 +97,13 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+    #[Route('/GetionUtilisateur', name: 'app_Utilisiateur')]
+    public function index(UserRepository $rep ): Response
+    {
+        $allUsers = $rep->findAll(); 
+        
+        return $this->render('Gestion/index.html.twig', [
+            'users' => $allUsers,
+        ]);
+    }
 }

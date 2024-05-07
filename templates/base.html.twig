@@ -29,14 +29,29 @@
 							<li class="nav-item">
 								<a class="nav-link" href="{{url('app_categories_index')}}">Nos Catégories</a>
 							</li>
-
+							</li>
+							{% if app.user %}
+							{% if (app.user.getRolesString())=="ROLE_ADMIN" %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{url('app_user_index')}}">ALL USERS</a>
+							</li>
+							{% endif %}
+							{% endif %}
 						</ul>
 						<ul class="navbar-nav me-left">
+						<li class="nav-item">
+						{% if app.user %}
+								<a class="nav-link active" href="#">{{app.user.getRolesString()}}
+									<span class="visually-hidden"></span>
+								</a>
+							</li>
+							{% endif %}
 							<li class="nav-item">
 								<a class="nav-link active" href="#">Panier
 									<span class="visually-hidden">(current)</span>
 								</a>
 							</li>
+							
 							{% if app.user %}
 							
 							<li class="nav-item">
