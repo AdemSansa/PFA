@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<div class="container">
+        <h1>{{ detail.titre }}</h1>
+        <div class="product-details">
+            <div class="product-image">
+            <img src ="">
+                <img src="{{detail.image}}" alt="{{ detail.titre }}">
+            </div>
+            <div class="product-info">
+                <p><strong>Price:</strong> {{ detail.image }}$</p>
+                <p><strong>ISBN:</strong> {{ detail.ISBN }}</p>
+                <p><strong>editeur:</strong> {{ detail.editeur }}</p>
+                <p><strong>date : </strong> {{ detail.EditedAt|date('d-m-Y')}}</p>
+                <p><strong>prix:</strong> {{ detail.slug }}</p>
+                <p><strong>Resume:</strong> {{  detail.resume }}</p>
+            </div>
+        </div>
+        <a href="{{ url('app_livre') }}" class="btn btn-primary">Back to Product List</a>
+    </div>
+    {% endblock %}
