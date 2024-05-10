@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,10 +48,13 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
+        $user = $token->getUser();
         // For example:
+        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+        return new RedirectResponse($this->urlGenerator->generate('app_ADMIN'));
+        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);}
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+
     }
 
     protected function getLoginUrl(Request $request): string

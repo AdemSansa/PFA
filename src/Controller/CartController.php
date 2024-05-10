@@ -33,14 +33,11 @@ class CartController extends AbstractController
     #[Route('/remove/{id}', name: 'cart_remove')]
     public function remove(Livre $livre, SessionInterface $session)
     {
-        //On récupère l'id du produit
+        
         $id = $livre->getId();
 
-        // On récupère le panier existant
+  
         $panier = $session->get('panier', []);
-
-        // On retire le produit du panier s'il n'y a qu'1 exemplaire
-        // Sinon on décrémente sa quantité
         if(!empty($panier[$id])){
             if($panier[$id] > 1){
                 $panier[$id]--;
@@ -51,16 +48,16 @@ class CartController extends AbstractController
 
         $session->set('panier', $panier);
         
-        //On redirige vers la page du panier
+       
         return $this->redirectToRoute('cart_index');
     }
     #[Route('/delete/{id}', name: 'cart_delete')]
     public function delete(Livre $livre, SessionInterface $session)
     {
-        //On récupère l'id du produit
+       
         $id = $livre->getId();
 
-        // On récupère le panier existant
+       
         $panier = $session->get('panier', []);
 
         if(!empty($panier[$id])){
@@ -68,8 +65,6 @@ class CartController extends AbstractController
         }
 
         $session->set('panier', $panier);
-        
-        //On redirige vers la page du panier
         return $this->redirectToRoute('cart_index');
     }
 
@@ -93,7 +88,7 @@ class CartController extends AbstractController
 
         $session->set('panier', $panier);
         
-        //On redirige vers la page du panier
+      
         return $this->redirectToRoute('cart_index');
         
     }
