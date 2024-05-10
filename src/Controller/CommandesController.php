@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Commandes;
+use App\Entity\CP;
+use App\Entity\User;
 use App\Form\CommandesType;
 use App\Repository\CommandesRepository;
+use App\Repository\CPRepository;
+use App\Repository\LivreRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,4 +84,8 @@ class CommandesController extends AbstractController
 
         return $this->redirectToRoute('app_commandes_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+   
 }

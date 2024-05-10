@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,17 @@ class Commandes
 
     #[ORM\Column(length: 255)]
     private ?string $Status = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $id_Cp = null;
+
+    #[ORM\OneToMany(targetEntity: CP::class, mappedBy: 'COM')]
+    private Collection $ID_CP;
+
+    public function __construct()
+    {
+        $this->ID_CP = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +103,40 @@ class Commandes
     public function setStatus(string $Status): static
     {
         $this->Status = $Status;
+
+        return $this;
+    }
+
+    public function getIdCP(): ?int
+    {
+        return $this->id_Cp;
+    }
+
+    public function setIdCP(int $id_CP): static
+    {
+        $this->id_Cp = $id_CP;
+
+        return $this;
+    }
+
+    public function addIDCP(CP $iDCP): static
+    {
+        if (!$this->ID_CP->contains($iDCP)) {
+            $this->ID_CP->add($iDCP);
+            $iDCP->setCOM($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIDCP(CP $iDCP): static
+    {
+        if ($this->ID_CP->removeElement($iDCP)) {
+            // set the owning side to null (unless already changed)
+            if ($iDCP->getCOM() === $this) {
+                $iDCP->setCOM(null);
+            }
+        }
 
         return $this;
     }
