@@ -12327,6 +12327,27 @@ textarea.form-control-lg {
 .alert-light .alert-link {
   color: #222;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination a, .pagination button {
+  color: #333;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #eee;
+  margin: 0 5px;
+}
+
+.pagination a:hover, .pagination button:hover {
+  background-color: #ddd;
+}
 
 .badge.bg-secondary, .badge.bg-light {
   color: #555;

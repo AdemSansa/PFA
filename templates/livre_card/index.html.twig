@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LivreCardController!{% endblock %}
+{% block body %}
+
+       {% block content %}
+    <h1>Liste des Livres</h1>
+
+    <div class="row">
+        {% for livre in pagination %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="{{ asset(livre.image) }}" alt="{{ livre.titre }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ livre.titre }}</h5>
+                        <p class="card-text">{{ livre.prix }}dt</p>
+                        
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+        
+        
+        <div class="pagination">
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock %}
+
+
