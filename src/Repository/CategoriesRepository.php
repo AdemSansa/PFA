@@ -26,7 +26,8 @@ class CategoriesRepository extends ServiceEntityRepository
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('c')
+    //        return $this->createQueryBuilder('od')
+      //            ->innerJoin('od.Orders','o')
     //            ->andWhere('c.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->orderBy('c.id', 'ASC')
