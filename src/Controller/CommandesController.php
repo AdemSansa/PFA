@@ -2,80 +2,59 @@
 
 namespace App\Controller;
 
+
+use App\Entity\CP;
+use App\Entity\User;
 use App\Entity\Commandes;
+use App\Entity\Orders;
 use App\Form\CommandesType;
+use App\Entity\OrdersDetails;
+use App\Repository\CPRepository;
+use App\Repository\UserRepository;
+use App\Repository\LivreRepository;
 use App\Repository\CommandesRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/commandes')]
 class CommandesController extends AbstractController
 {
-    #[Route('/', name: 'app_commandes_index', methods: ['GET'])]
-    public function index(CommandesRepository $commandesRepository): Response
+    #[Route('/ajout', name: 'app_commandes_add')]
+    public function add1(SessionInterface $session,LivreRepository $Lp,EntityManagerInterface $em) : Response 
     {
-        return $this->render('commandes/index.html.twig', [
-            'commandes' => $commandesRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_commandes_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $commande = new Commandes();
-        $form = $this->createForm(CommandesType::class, $commande);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($commande);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_commandes_index', [], Response::HTTP_SEE_OTHER);
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $panier = $session->get('panier',[]);
+        if($panier==[])
+        {
+            $this->addFlash('message','Votre panier est vide');
+            return $this->redirectToRoute('app_home');
         }
+        $commande = new Orders();
+        
+        $commande->setUsers($this->getUser());
+        foreach($panier as $item => $qte)
+        {
+            $orderDetails = new OrdersDetails();
+            $livre  =  $Lp->find($item);
+            $prix = $livre->getPrix();
+            $orderDetails->setLivres($livre);
+            $orderDetails->setPrix($prix);
+            $orderDetails->setQte($qte);
+            
+            $commande->addOrdersDetail($orderDetails);
 
-        return $this->render('commandes/new.html.twig', [
-            'commande' => $commande,
-            'form' => $form,
-        ]);
-    }
 
-    #[Route('/{id}', name: 'app_commandes_show', methods: ['GET'])]
-    public function show(Commandes $commande): Response
-    {
-        return $this->render('commandes/show.html.twig', [
-            'commande' => $commande,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_commandes_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Commandes $commande, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(CommandesType::class, $commande);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_commandes_index', [], Response::HTTP_SEE_OTHER);
         }
+        $em->persist($commande);
+        $em->flush();
 
-        return $this->render('commandes/edit.html.twig', [
-            'commande' => $commande,
-            'form' => $form,
-        ]);
-    }
+        $session->remove('panier');
 
-    #[Route('/{id}', name: 'app_commandes_delete', methods: ['POST'])]
-    public function delete(Request $request, Commandes $commande, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$commande->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($commande);
-            $entityManager->flush();
+        $this->addFlash('message', 'Commande créée avec succès');
+        return $this->redirectToRoute('app_home');
         }
-
-        return $this->redirectToRoute('app_commandes_index', [], Response::HTTP_SEE_OTHER);
-    }
-}
+   } 

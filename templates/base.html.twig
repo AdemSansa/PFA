@@ -37,11 +37,17 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarColor01">
 						<ul class="navbar-nav me-auto">
+						{% if app.user %}
+							{% if (app.user.getRolesString())=="ROLE_USER" %}
 							<li class="nav-item">
 								<a class="nav-link active" href="{{url('app_home')}}">Accueil
 									<span class="visually-hidden">(current)</span>
 								</a>
 							</li>
+							{% endif %}
+							{% endif %}
+							{% if app.user %}
+							{% if (app.user.getRolesString())=="ROLE_ADMIN" %}
 							<li class="nav-item">
 								<a class="nav-link" href="{{url('app_livre')}}">Nos Livres</a>
 							</li>
@@ -49,8 +55,7 @@
 								<a class="nav-link" href="{{url('app_categories_index')}}">Nos Catégories</a>
 							</li>
 							</li>
-							{% if app.user %}
-							{% if (app.user.getRolesString())=="ROLE_ADMIN" %}
+							
 							<li class="nav-item">
 								<a class="nav-link" href="{{url('app_user_index')}}">ALL USERS</a>
 							</li>
@@ -65,12 +70,15 @@
 								</a>
 							</li>
 							{% endif %}
+							{% if app.user %}
+							{% if (app.user.getRolesString())=="ROLE_USER" %}
 							<li class="nav-item">
-								<a class="nav-link active" href="#">Panier
+								<a class="nav-link active" href="{{url('cart_index')}}">Panier
 									<span class="visually-hidden">(current)</span>
 								</a>
 							</li>
-							
+							{% endif %}
+							{% endif %}
 							{% if app.user %}
 							
 							<li class="nav-item">
