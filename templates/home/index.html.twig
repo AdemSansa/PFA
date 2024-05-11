@@ -10,18 +10,31 @@ TEST GITHUB</h1>
       <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
       <button class="btn btn-primary" type="button" id="button-addon2">Button</button>
     </div>
-<section class="py-5"><div class="container px-4 px-lg-5 mt-5">
+<section class="py-5 "><div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-{% for item in livres %}
-<div class="col mb-5">
+
+<table id="example" class="display">
+    <thead>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+    
+       {% for i in 0..(livres|length - 2) %}
+            {% if i is divisible by(2) %}
+                        <tr>
+                        <td><div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="{{item.image}}" alt="..." />
+                            <img class="card-img-top" src="{{livres[i].image }}" alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">{{item.titre}}</h5>
+                                    <h5 class="fw-bolder">{{livres[i].titre}}</h5>
                                      <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
@@ -30,7 +43,7 @@ TEST GITHUB</h1>
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    {{item.prix}} Dt
+                                    {{livres[i].prix}} Dt
                                 </div>
                             </div>
                             <!-- Product actions-->
@@ -39,8 +52,39 @@ TEST GITHUB</h1>
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#"> Add to cart</a></div>
                             </div>
                         </div>
-                    </div>
-{% endfor %}
+                    </div></td>
+                    <td><div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{livres[i+1].image }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{livres[i+1].titre}}</h5>
+                                     <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    {{livres[i+1].prix}} Dt
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-2 pt-0 border-top-0 bg-transparent d-flex">
+                                <div class="text-center"><a class="btn btn-outline-info mt-auto" href="#">View Details</a></div>&nbsp&nbsp
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#"> Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div></td></tr>
+            {% endif %}
+        {% endfor %}
+        
+    </tbody>
+</table>
 
-
+<script src="{{asset('js/script.js')}}"></script>
 {% endblock %}
