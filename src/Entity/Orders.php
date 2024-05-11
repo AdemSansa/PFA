@@ -28,6 +28,9 @@ class Orders
     #[ORM\OneToMany(targetEntity: OrdersDetails::class, mappedBy: 'orders', orphanRemoval: true ,cascade: ['persist'])]
     private Collection $ordersDetails;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $Total = null;
+
     public function __construct()
     {
         $this->ordersDetails = new ArrayCollection();
@@ -101,6 +104,18 @@ class Orders
                 $ordersDetail->setOrders(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTotal(): ?float
+    {
+        return $this->Total;
+    }
+
+    public function setTotal(?float $Total): static
+    {
+        $this->Total = $Total;
 
         return $this;
     }

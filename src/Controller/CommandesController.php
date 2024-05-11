@@ -34,7 +34,7 @@ class CommandesController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         $commande = new Orders();
-        
+        $total = 0;
         $commande->setUsers($this->getUser());
         foreach($panier as $item => $qte)
         {
@@ -44,11 +44,12 @@ class CommandesController extends AbstractController
             $orderDetails->setLivres($livre);
             $orderDetails->setPrix($prix);
             $orderDetails->setQte($qte);
-            
+            $total+= $prix*$qte;
             $commande->addOrdersDetail($orderDetails);
 
 
         }
+        $commande->setTotal($total);
         $em->persist($commande);
         $em->flush();
 
