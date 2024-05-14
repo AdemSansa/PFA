@@ -73,6 +73,7 @@ class CommandesController extends AbstractController
         $em->flush();
         //Email
         $session->remove('panier');
+
         $email = (new Email())
             ->from('adem.sansa7@gmail.com')
             ->to($this->getUser()->getUserIdentifier())
