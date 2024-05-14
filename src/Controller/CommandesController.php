@@ -98,6 +98,6 @@ class CommandesController extends AbstractController
     </table>' . $text);
         $mailer->send($email);
         $this->addFlash('message', 'Commande crée avec succès');
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('checkout');
         }
-   } 
+   }
