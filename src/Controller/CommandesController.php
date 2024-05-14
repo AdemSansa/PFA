@@ -55,6 +55,6 @@ class CommandesController extends AbstractController
         $session->remove('panier');
 
         $this->addFlash('message', 'Commande créée avec succès');
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('checkout');
         }
    } 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "505d5609acb6641bafbc4a16389d9639",
+    "content-hash": "61da5056ee5b27ea8662657d4aa912bb",
     "packages": [
         {
             "name": "composer/semver",
@@ -2383,6 +2383,65 @@
                 "source": "https://github.com/scheb/2fa-email/tree/v7.3.0"
             },
             "time": "2024-01-18T20:20:03+00:00"
+        },
+        {
+            "name": "stripe/stripe-php",
+            "version": "v14.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "cc4108812a0b6db06041e520fe340f6d8ecfeff1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/cc4108812a0b6db06041e520fe340f6d8ecfeff1",
+                "reference": "cc4108812a0b6db06041e520fe340f6d8ecfeff1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "3.5.0",
+                "phpstan/phpstan": "^1.2",
+                "phpunit/phpunit": "^5.7 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stripe\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stripe and contributors",
+                    "homepage": "https://github.com/stripe/stripe-php/contributors"
+                }
+            ],
+            "description": "Stripe PHP Library",
+            "homepage": "https://stripe.com/",
+            "keywords": [
+                "api",
+                "payment processing",
+                "stripe"
+            ],
+            "support": {
+                "issues": "https://github.com/stripe/stripe-php/issues",
+                "source": "https://github.com/stripe/stripe-php/tree/v14.6.0"
+            },
+            "time": "2024-05-09T19:39:17+00:00"
         },
         {
             "name": "symfony/asset",
