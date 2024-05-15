@@ -16,11 +16,12 @@ use App\Repository\LivreRepository;
 use App\Repository\CommandesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mailer\MailerInterface;
 
 #[Route('/commandes')]
 class CommandesController extends AbstractController
@@ -72,10 +73,10 @@ class CommandesController extends AbstractController
         $em->persist($commande);
         $em->flush();
         //Email
-        $session->remove('panier');
-
+        //$session->remove('panier');
+        //dd($this->getUser()->getUserIdentifier());
         $email = (new Email())
-            ->from('adem.sansa7@gmail.com')
+            ->from('ademsansa7@gmail.com')
             ->to($this->getUser()->getUserIdentifier())
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')

@@ -21,7 +21,7 @@ class LivreCardController extends AbstractController
         $pagination = $paginator->paginate(
             $livres,  // Query results (array of Livre objects)
             $request->query->getInt('page', 1), // Current page from query parameter (default 1)
-            5      // Items per page (adjust as needed)
+            6      // Items per page (adjust as needed)
         );
         return $this->render('livre_card/index.html.twig', [
             'pagination' => $pagination,
