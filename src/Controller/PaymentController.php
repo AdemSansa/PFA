@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
+use Symfony\Component\Mime\Email;
 use App\Repository\LivreRepository;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -62,8 +64,15 @@ class PaymentController extends AbstractController
 
 
     #[Route('/success-url', name: 'success_url')]
-    public function successUrl(): Response
+    public function successUrl(MailerInterface $mailer): Response
     {
+        
+        $email = (new Email())
+            ->from('ademsansa7@gmail.com')
+            ->to($this->getUser()->getUserIdentifier())
+            ->subject('Commande Chez Symbooks')
+            ->html('<p>Payement effectué avec succes : </p>');
+        $mailer->send($email);
         return $this->render('payment/succes.html.twig', []);
     }
 
