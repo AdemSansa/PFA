@@ -36,7 +36,23 @@ class LivreRepository extends ServiceEntityRepository
             ;
         }
 
-    //    public function findOneBySomeField($value): ?Livre
+        public function findBooksSoldQuantityBetweenDates(\DateTime $startDate, \DateTime $endDate)
+    {
+        $qb = $this->createQueryBuilder('l')
+            ->select('l.titre', 'SUM(od.Qte) AS total_quantity')
+            ->join('l.ordersDetails', 'od')
+            ->join('od.orders', 'o')
+            ->where('o.createdAt BETWEEN :startDate AND :endDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->groupBy('l.titre')
+            ->getQuery();
+
+        return $qb->getResult();
+    }
+
+
+     //    public function findOneBySomeField($value): ?Livre
     //    {
     //        return $this->createQueryBuilder('l')
     //            ->andWhere('l.exampleField = :val')
@@ -46,3 +62,5 @@ class LivreRepository extends ServiceEntityRepository
     //        ;
     //    }
 }
+
+   

@@ -49,6 +49,9 @@
 							{% if app.user %}
 							{% if (app.user.getRolesString())=="ROLE_ADMIN" %}
 							<li class="nav-item">
+								<a class="nav-link" href="{{url('app_dashbordadmin')}}">Tableau de bord</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" href="{{url('app_livre')}}">Nos Livres</a>
 							</li>
 							<li class="nav-item">
