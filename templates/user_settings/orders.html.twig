@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+{% for order in orders %}
+<div>
+<h1>Commande numero  : {{order.id}}</h1>
+
+
+</div>
+<div class="container">
+ <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ order.id }}</td>
+            </tr>
+           
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+              <tr>
+                <th>Total</th>
+                <td>{{ order.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Livre</th>
+                <th>prix</th>
+                <th>qte</th>
+            </tr>
+            {% for item in order.ordersDetails %}
+                
+           
+            <tr>
+                
+                <td>{{item.livres.titre}}</td>
+                <td>{{ item.prix}}</td>
+                <td>{{ item.qte}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+             
+        
+    </table>
+<div>    
+<hr>
+{% endfor %}
+
+
+
+{% endblock %}

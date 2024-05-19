@@ -51,6 +51,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Orders::class, mappedBy: 'users')]
     private Collection $orders;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Nom = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Prenom = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $NumeroTelephone = null;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -197,6 +206,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $order->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->Nom;
+    }
+
+    public function setNom(string $Nom): static
+    {
+        $this->Nom = $Nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->Prenom;
+    }
+
+    public function setPrenom(string $Prenom): static
+    {
+        $this->Prenom = $Prenom;
+
+        return $this;
+    }
+
+    public function getNumeroTelephone(): ?string
+    {
+        return $this->NumeroTelephone;
+    }
+
+    public function setNumeroTelephone(?string $NumeroTelephone): static
+    {
+        $this->NumeroTelephone = $NumeroTelephone;
 
         return $this;
     }
