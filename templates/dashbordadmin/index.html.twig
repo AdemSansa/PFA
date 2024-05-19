@@ -3,12 +3,18 @@
 
 {% block stylesheets %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />{% endblock %}
 {% block body %}
+<div class="container">
+<h2>choisir votre date</h2>
+  <form action="dashbordadmin" method="post">
+  <input type="date" name="date1" >  <input type="date" name="date2" >    <button type="submit" class="btn btn-primary">submit</button>
+</form>
+
+</div>
 <h1 style='color:red'>statistique des livres: </h1>
 <div style="width: 800px;"><canvas id="acquisitions"></canvas></div>
 
 <h1 style='color:red'>statistique des commandes : </h1>
 <div style="width: 800px;"><canvas id="commande"></canvas></div>
-
 
 
 
