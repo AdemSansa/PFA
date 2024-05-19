@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashbordadminController!{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />{% endblock %}
+{% block body %}
+<h1 style='color:red'>statistique des livres: </h1>
+<div style="width: 800px;"><canvas id="acquisitions"></canvas></div>
+
+<h1 style='color:red'>statistique des commandes : </h1>
+<div style="width: 800px;"><canvas id="commande"></canvas></div>
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const c=document.getElementById('acquisitions');
+    const c1=document.getElementById('commande');
+     new Chart(c, {
+  type: 'bar',
+  data: {
+    labels: {{ nom|raw }}, // Ensure labels are strings
+    datasets: [{
+      label: 'les livres',
+      data: {{ qte|raw }}, // Force values to be non-negative
+      borderWidth: 1,
+      borderColor: 'rgba(75, 192, 192, 1)',
+      backgroundColor: 'rgba(75, 192, 192, 0.2)'
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{ // Use yAxes for compatibility with older Chart.js versions
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1
+        }
+      }]
+    }
+  }
+});
+
+   new Chart(c1,{
+         type: 'bar',
+      data: {
+        labels: {{com|raw}},
+        datasets: [
+          {
+            label: 'nombre de commande',
+            data: {{max|raw}},
+             borderWidth: 2,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)'
+          }
+        ]
+      },
+      options: {
+    scales: {
+      yAxes: [{ // Use yAxes for compatibility with older Chart.js versions
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1
+        }
+      }]
+    }
+  }
+    })
+
+</script>
+{% endblock %}
+
+
+

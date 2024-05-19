@@ -20,6 +20,17 @@ class OrdersRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Orders::class);
     }
+    
+    public function commandestotal(\DateTime $startDate, \DateTime $endDate){
+        $qb = $this->createQueryBuilder('o')
+        ->select('COUNT(o.id) AS total')
+        ->where('o.createdAt BETWEEN :startDate AND :endDate')
+        ->setParameter('startDate', $startDate)
+        ->setParameter('endDate', $endDate)
+        ->getQuery();
+        return $qb->getResult();
+    }
+
 
     //    /**
     //     * @return Orders[] Returns an array of Orders objects
@@ -46,3 +57,5 @@ class OrdersRepository extends ServiceEntityRepository
     //        ;
     //    }
 }
+
+    
