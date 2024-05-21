@@ -22,11 +22,12 @@ class PaimentmethodController extends AbstractController
     {
         $selectedPayment = $request->request->get('modePaiement');
         if($selectedPayment==="Paiement à la livraison"){
-            return $this->redirectToRoute('checkout');
-        }
-        else{
             return $this->render('payment/succe.html.twig'
         );
+            
+        }
+        else{
+            return $this->redirectToRoute('checkout');
         }
         
     }
