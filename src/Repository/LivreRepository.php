@@ -50,6 +50,14 @@ class LivreRepository extends ServiceEntityRepository
 
         return $qb->getResult();
     }
+    public function findBySearchTerm(string $searchTerm): array
+{
+    return $this->createQueryBuilder('l')
+        ->where('l.titre LIKE :term OR l.resume LIKE :term')
+        ->setParameter('term', '%' . $searchTerm . '%')
+        ->getQuery()
+        ->getResult();
+}
 
 
      //    public function findOneBySomeField($value): ?Livre

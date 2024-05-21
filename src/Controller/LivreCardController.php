@@ -14,14 +14,21 @@ class LivreCardController extends AbstractController
     #[Route('/livre/card', name: 'app_livre_card')]
     public function index(LivreRepository $livreRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // Retrieve all livres (or apply filters/sorting if needed)
-        $livres = $livreRepository->findAll();
+        $searchTerm = $request->get('q'); 
+        $livres = $livreRepository->findBySearchTerm($searchTerm);
+        if (empty($livre)) {
+            $livres = $livreRepository->findAll();
+        }
+
+
+
+        
     
-        // Use Paginator to paginate the livres
+  
         $pagination = $paginator->paginate(
-            $livres,  // Query results (array of Livre objects)
-            $request->query->getInt('page', 1), // Current page from query parameter (default 1)
-            5      // Items per page (adjust as needed)
+            $livres,  
+            $request->query->getInt('page', 1), 
+            5      
         );
         return $this->render('livre_card/index.html.twig', [
             'pagination' => $pagination,

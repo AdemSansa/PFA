@@ -14,8 +14,17 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(LivreRepository $livreRepository, PaginatorInterface $paginator, Request $request): Response
     {
-    
-        $livres = $livreRepository->findAll();
+        $searchTerm = $request->get('q'); 
+        if (!empty($searchTerm))
+        {
+            $livres = $livreRepository->findBySearchTerm($searchTerm);
+          
+        }
+       
+        if (empty($livres)) {
+            $livres = $livreRepository->findAll();
+        }
+
     
    
         $pagination = $paginator->paginate(
