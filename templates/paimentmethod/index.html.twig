@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PaimentmethodController!{% endblock %}
+
+{% block body %}
+<style>
+   body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .contenu {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 20px;
+        }
+
+        .option {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .option.selected {
+            background-color: #e0e0e0;
+        }
+
+        .option label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .bouton {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .bouton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</style>
+
+<div class="example-wrapper">
+   <div class="contenu">
+    <h2>Choix du mode de paiement</h2>
+
+    <p>Sélectionnez votre mode de paiement préféré pour finaliser votre commande.</p>
+    <form method="POST" action="{{ path('app_modepaiment') }}">
+    <div class="option">
+        <input type="radio" id="paiementLivraison" name="modePaiement" value="Paiement à la livraison" checked>
+        <label for="paiementLivraison">Paiement à la livraison</label>
+    </div>
+
+    <div class="option">
+        <input type="radio" id="paiementCarte" name="modePaiement" value="carte">
+        <label for="paiementCarte">Paiement par carte</label>
+    </div>
+     <button type="submit" class="bouton">Valider le paiement</button>
+</form>
+</div>
+{% endblock %}

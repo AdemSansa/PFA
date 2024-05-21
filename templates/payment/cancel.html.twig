@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement échoué</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .contenu {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #990000; /* Rouge pour indiquer une erreur */
+            font-size: 24px;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .bouton {
+            background-color: #dc3545; /* Rouge pour indiquer une erreur */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .bouton:hover {
+            background-color: #c82333; /* Rouge plus foncé */
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenu">
+    <h1>Paiement échoué</h1>
+    <p>Nous avons rencontré un problème lors du traitement de votre paiement. Veuillez réessayer ultérieurement ou contacter notre service client.</p>
+
+    <a href="{{url('app_home')}}" class="bouton">Retourner à la boutique</a>
+</div>
+
+</body>
+</html>
