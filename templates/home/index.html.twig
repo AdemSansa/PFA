@@ -220,7 +220,7 @@
 
 
 <form action="{{path('app_home')}}"class='d-flex' method="post">
-       <input type="text" name="q"  style='width:90%' class="form-control me-sm-2" placeholder="Search products...">
+       <input type="text" name="q"  style='width:90%' class="form-control me-sm-2" placeholder="Chercher un livre...">
        <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
       
       </form>
@@ -252,7 +252,7 @@
 
           <div class="d-grid gap-2 my-4">
 
-            <a href="{{url('app_cart',{'id':livre.id})}}" class="btn btn-warning bold-btn">add to cart</a>
+            <a href="{{url('app_cart',{'id':livre.id})}}" class="btn btn-warning bold-btn">Ajouter au panier</a>
 
           </div>
           <div class="clearfix mb-1">
